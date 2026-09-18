@@ -1,4 +1,7 @@
 require('dotenv').config();
+const dns = require('dns');
+dns.setServers(['8.8.8.8', '8.8.4.4']); // Forzar a Node.js a usar DNS de Google
+
 const mongoose = require('mongoose');
 const Usuario = require('../models/usuario.model');
 
@@ -13,14 +16,14 @@ const crearUsuarioInicial = async () => {
 
     if (usuarioExistente) {
       console.log('El usuario ADMIN ya existe en la base de datos.');
-      process.exit(0);
+      return;
     }
 
     // 3. Crear el usuario ADMIN por defecto
     const usuarioAdmin = new Usuario({
       nombre: 'Administrador Inicial',
       email: 'admin@correo.com',
-      password: 'Admin123', // El modelo se encarga de encriptarla con bcrypt
+      password: 'Admin123',
       rol: 'ADMIN'
     });
 
@@ -33,6 +36,7 @@ const crearUsuarioInicial = async () => {
     console.error('Error al crear el usuario inicial:', error.message);
   } finally {
     await mongoose.disconnect();
+    console.log('Conexión cerrada.');
     process.exit(0);
   }
 };
