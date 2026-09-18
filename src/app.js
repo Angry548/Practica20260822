@@ -11,8 +11,9 @@ const app = express();
 // Configuración de CORS
 const corsOptions = {
   origin: process.env.CLIENT_URL || '*', // O especifica tu frontend (ej: 'http://localhost:5173')
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization','x-use-cookie']
 };
 
 app.use(cors(corsOptions)); // Aplicar CORS globalmente
