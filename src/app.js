@@ -11,6 +11,7 @@ const app = express();
 // Lista de orígenes permitidos
 const allowedOrigins = [
   'https://angry548.github.io',
+  'https://practica20260912-theta.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000'
 ];
@@ -28,6 +29,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); // Aplicar CORS globalmente
+
 app.use(express.json());
 app.use(cookieParser());
 
